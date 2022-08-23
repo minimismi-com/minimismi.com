@@ -111,8 +111,8 @@ export default function Home() {
             <Image
               src="/images/image-1.jpg"
               alt="Minimismi Leotard"
-              width={1125}
-              height={1500}
+              width={300}
+              height={400}
             />
           </div>
           <div
@@ -124,8 +124,8 @@ export default function Home() {
             <Image
               src="/images/image-2.jpg"
               alt="Minimismi Leotard"
-              width={1125}
-              height={1500}
+              width={300}
+              height={400}
             />
           </div>
           <div
@@ -137,8 +137,8 @@ export default function Home() {
             <Image
               src="/images/image-3.jpg"
               alt="Minimismi Leotard"
-              width={1125}
-              height={1500}
+              width={300}
+              height={400}
             />
           </div>
           <div className={styles.maskOverlay}>
@@ -147,6 +147,7 @@ export default function Home() {
               alt="Mask"
               width={600}
               height={498}
+              priority
             />
           </div>
         </div>
