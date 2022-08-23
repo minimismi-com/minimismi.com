@@ -49,12 +49,10 @@ export default function Home() {
         <main className={styles.main}>
           <h1>Minimismi</h1>
           <p>
-            🇱🇻 We&apos;re Minimismi. Unique, minimalist, {` `}
-            <strong>high quality leotards</strong>
-            {` `}
-            that are handmade from 100% recycled materials. Designed for dancers
-            that care for the environment and are not afraid to express
-            themselves 🤍
+            🇱🇻 Mēs esam Minimismi. Unikāli, minimālistiski, augstas kvalitātes,
+            roku darba bodiji, izgatavoti no 100% pārstrādāta materiāla.
+            Paredzēts dejotājiem, kuri rūpējas par vidi un nebaidās izpaust sevi
+            🖤
           </p>
           <p>
             🇪🇺 We&apos;re Minimismi. Unique, minimalist, high quality leotards
@@ -65,10 +63,7 @@ export default function Home() {
           <hr className={styles.split} />
           {!isSubscribed ? (
             <>
-              <h2>
-                Don&apos;t miss it! A first batch of leotards will arrive soon.
-                ↴
-              </h2>
+              <h2>The first batch will arrive soon. Don&apos;t miss it! ↴</h2>
               <label className={styles.inputLabel} htmlFor="emailAddress">
                 Your e-mail address:
               </label>
