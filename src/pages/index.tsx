@@ -3,8 +3,37 @@ import Image from 'next/image';
 
 import styles from '@/styles/Home.module.css';
 import classnames from 'classnames';
+import { useState } from 'react';
+import { validateEmail } from '@/utils/generic';
+import { Data } from './api/mailchimp';
 
 export default function Home() {
+  const [email, setEmail] = useState(``);
+  const [isValid, setIsValid] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  const handleSubmit = async () => {
+    setIsProcessing(() => true);
+
+    try {
+      const data: Data | void = await fetch(`/api/mailchimp`, {
+        method: `POST`,
+        body: JSON.stringify({ email }),
+        headers: {
+          'Content-Type': `application/json`,
+        },
+      }).then((response) => response.json());
+
+      if (data?.success === true) {
+        setIsProcessing(false);
+        setIsSubscribed(true);
+      }
+    } finally {
+      setIsProcessing(() => false);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,7 +45,65 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}></main>
+      <div className={styles.centerWrap}>
+        <main className={styles.main}>
+          <h1>Minimismi</h1>
+          <p>
+            🇱🇻 We&apos;re Minimismi. Unique, minimalist, {` `}
+            <strong>high quality leotards</strong>
+            {` `}
+            that are handmade from 100% recycled materials. Designed for dancers
+            that care for the environment and are not afraid to express
+            themselves 🤍
+          </p>
+          <p>
+            🇪🇺 We&apos;re Minimismi. Unique, minimalist, high quality leotards
+            that are handmade from 100% recycled materials. Designed for dancers
+            that care for the environment and are not afraid to express
+            themselves 🤍
+          </p>
+          <hr className={styles.split} />
+          {!isSubscribed ? (
+            <>
+              <h2>
+                Don&apos;t miss it! A first batch of leotards will arrive soon.
+                ↴
+              </h2>
+              <label className={styles.inputLabel} htmlFor="emailAddress">
+                Your e-mail address:
+              </label>
+              <input
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.currentTarget.value);
+
+                  if (validateEmail(e.currentTarget.value) && !isValid) {
+                    setIsValid(true);
+                  } else {
+                    setIsValid(false);
+                  }
+                }}
+                id="emailAddress"
+                className={styles.input}
+                type="email"
+                required
+                placeholder="example@mail.com"
+              />
+              <button
+                onClick={handleSubmit}
+                className={styles.submitButton}
+                disabled={!isValid || isProcessing}
+              >
+                {!isProcessing
+                  ? `Sign me up for a reminder`
+                  : `One moment.. Adding you to the list.`}
+              </button>
+            </>
+          ) : (
+            <h2>💃 Thank you! We will keep you up to date </h2>
+          )}
+        </main>
+      </div>
 
       <div className={styles.mask}>
         <div className={styles.maskWrapper}>
