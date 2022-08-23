@@ -1,3 +1,11 @@
+@font-face {
+  src: url('/fonts/azo-sans-uber-webfont.woff2') format('woff2'),
+    url('/fonts/azo-sans-uber-webfont.woff') format('woff');
+  font-family: 'AzoSansUberW01-Regular';
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   background-attachment: fixed;
   background-image: url('/images/sketch-white.jpg');

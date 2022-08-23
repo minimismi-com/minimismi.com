@@ -72,10 +72,10 @@ export default function Home() {
                 onChange={(e) => {
                   setEmail(e.currentTarget.value);
 
-                  if (validateEmail(e.currentTarget.value) && !isValid) {
-                    setIsValid(true);
+                  if (validateEmail(e.currentTarget.value) === true) {
+                    setIsValid(() => true);
                   } else {
-                    setIsValid(false);
+                    setIsValid(() => false);
                   }
                 }}
                 id="emailAddress"

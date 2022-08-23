@@ -102,6 +102,7 @@
   font-weight: bold;
   font-size: 1rem;
   margin-top: 1rem;
+  color: black !important;
 }
 
 .submitButton:hover {
@@ -110,7 +111,7 @@
 
 .submitButton:disabled {
   background-color: rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.2) !important;
 }
 
 .split {
