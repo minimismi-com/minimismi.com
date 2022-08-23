@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Minimismi Leotards</title>
+        <title>Minimismi.com | Unique Leotards handmade in Latvia</title>
         <meta
           name="description"
           content="Unique, handmade ballet leotards. Made with love in Latvia."
