@@ -4,7 +4,7 @@ import 'animate.css';
 
 import styles from '@/styles/Home.module.css';
 import classnames from 'classnames';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { validateEmail } from '@/utils/generic';
 import { Data } from './api/mailchimp';
 import Select from 'react-select';
@@ -13,6 +13,7 @@ import { ImWhatsapp } from 'react-icons/im';
 import { BsCartPlus, BsEnvelope } from 'react-icons/bs';
 
 import { customScrollTo } from '@/utils/generic';
+import { useRouter } from 'next/router';
 
 const options = [
   { value: `en`, label: `🇪🇺 English` },
@@ -21,12 +22,10 @@ const options = [
 
 export default function Home() {
   const ref = useRef<HTMLDivElement>(null);
-  const [selectedOption, setSelectedOption] = useState(
-    options.find((option) => option.value === `en`),
-  );
-  const [lang, setLang] = useState(
-    options.find((option) => option.value === `en`),
-  );
+  const router = useRouter();
+  const defaultLanguage = options.find((option) => option.value === `en`);
+  const [selectedOption, setSelectedOption] = useState(defaultLanguage);
+  const [lang, setLang] = useState(defaultLanguage);
   const [email, setEmail] = useState(``);
   const [isValid, setIsValid] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -64,6 +63,19 @@ export default function Home() {
     });
   };
 
+  useEffect(() => {
+    const routerLang = router.query?.lang;
+
+    if (routerLang && routerLang !== lang?.value) {
+      const newLang = options.find(
+        (option) => option.value === router.query.lang,
+      );
+      console.log(newLang);
+      setSelectedOption(newLang);
+      setLang(newLang);
+    }
+  }, [router.query?.lang]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -80,6 +92,7 @@ export default function Home() {
           <Select
             instanceId="languageSelector"
             defaultValue={selectedOption}
+            value={selectedOption}
             onChange={(newValue) => {
               newValue?.value && setSelectedOption(newValue);
               newValue?.value && setLang(newValue);
