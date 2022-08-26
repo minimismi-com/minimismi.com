@@ -191,6 +191,7 @@
   align-items: center;
   cursor: pointer;
   margin-bottom: 4.5rem;
+  color: black !important;
 }
 
 .buttonWrap button:hover {
