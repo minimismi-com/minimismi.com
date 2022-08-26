@@ -9,6 +9,7 @@ specifiers:
   '@types/react-dom': 18.0.6
   '@typescript-eslint/eslint-plugin': 5.33.1
   '@typescript-eslint/parser': 5.33.1
+  animate.css: 4.1.1
   classnames: 2.3.1
   eslint: 8.22.0
   eslint-config-next: 12.2.5
@@ -30,6 +31,7 @@ specifiers:
 
 dependencies:
   '@babel/core': 7.18.13
+  animate.css: 4.1.1
   classnames: 2.3.1
   mailchimp-api-v3: 1.15.0
   mailchimp-marketing: 5.0.0
@@ -1025,6 +1027,10 @@ packages:
       require-from-string: 2.0.2
       uri-js: 4.4.1
     dev: true
+
+  /animate.css/4.1.1:
+    resolution: {integrity: sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==}
+    dev: false
 
   /ansi-escapes/4.3.2:
     resolution: {integrity: sha512-gKXj5ALrKWQLsYG9jlTRmR/xKluxHV+Z9QEwNIgCfM1/uwPMCuzVVnh5mwTd+OuBZcwSIMbqssNWRm1lE51QaQ==}

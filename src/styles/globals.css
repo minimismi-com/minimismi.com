@@ -12,6 +12,7 @@ html {
   background-position: bottom left;
   background-repeat: no-repeat;
   background-size: 300px;
+  scroll-behavior: smooth;
 }
 
 html,
@@ -33,11 +34,14 @@ a {
 
 h1 {
   font-family: 'AzoSansUberW01-Regular';
+  margin-top: 2rem;
+  margin-bottom: 0rem;
 }
 
 h2 {
   font-weight: bold;
   font-size: 1.05rem;
+  margin-top: 0;
 }
 
 p {
@@ -48,4 +52,9 @@ p {
 
 p strong {
   font-weight: 700;
+}
+
+hr {
+  border: none;
+  border-top: dashed 1px rgba(0, 0, 0, 0.25);
 }

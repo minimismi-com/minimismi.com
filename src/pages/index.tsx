@@ -1,15 +1,18 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import 'animate.css';
 
 import styles from '@/styles/Home.module.css';
 import classnames from 'classnames';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { validateEmail } from '@/utils/generic';
 import { Data } from './api/mailchimp';
 import Select from 'react-select';
 import { FiInstagram } from 'react-icons/fi';
 import { ImWhatsapp } from 'react-icons/im';
-import { BsEnvelope } from 'react-icons/bs';
+import { BsCartPlus, BsEnvelope } from 'react-icons/bs';
+
+import { customScrollTo } from '@/utils/generic';
 
 const options = [
   { value: `en`, label: `🇪🇺 English` },
@@ -17,6 +20,7 @@ const options = [
 ];
 
 export default function Home() {
+  const ref = useRef<HTMLDivElement>(null);
   const [selectedOption, setSelectedOption] = useState(
     options.find((option) => option.value === `en`),
   );
@@ -49,6 +53,17 @@ export default function Home() {
     }
   };
 
+  const scrollAndShake = () => {
+    customScrollTo(0, () => {
+      if (!ref.current?.classList.contains(`animate__shakeX`)) {
+        ref.current?.classList.add(`animate__shakeX`);
+        setTimeout(() => {
+          ref.current?.classList.remove(`animate__shakeX`);
+        }, 1500);
+      }
+    });
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -74,59 +89,34 @@ export default function Home() {
           <h1>Minimismi</h1>
           {lang?.value === `lv` && (
             <p>
-              Mēs esam Minimismi. Unikāli, minimālistiski, augstas kvalitātes,
-              roku darba bodiji, izgatavoti no 100% pārstrādāta materiāla.
-              Paredzēts dejotājiem, kuri rūpējas par vidi un nebaidās izpaust
-              sevi 🖤
+              Mēs esam Minimismi. Unikāls, minimālistisks un augstas kvalitātes
+              roku darbs. Dejošanai paredzēta apģērbu līnija, kas radīta no
+              dabai draudzīga un 100% pārstrādāta materiāla. Paredzēts
+              dejotājiem, kuri rūpējas par vidi un nebaidās izpausties 🖤
             </p>
           )}
           {lang?.value === `en` && (
             <p>
-              We&apos;re Minimismi. Unique, minimalist, high quality leotards
-              that are handmade from 100% recycled materials. Designed for
-              dancers that care for the environment and are not afraid to
-              express themselves 🤍
+              We&apos;re Minimismi. Unique, minimalist, high quality ballet
+              clothing that are handmade from 100% recycled materials. Designed
+              for dancers that care for the environment and are not afraid to
+              express themselves 🖤
             </p>
           )}
-          <div className={styles.iconsWrapper}>
-            <p className={styles.iconsText}>
-              {lang?.value === `en` ? `Questions?` : `Jautājumi?`}
-            </p>
-            <a
-              href="https://www.instagram.com/minimismi_lv/"
-              target="_blank"
-              rel="noopener nofollow noreferrer"
-            >
-              <FiInstagram size={20} />
-            </a>
-            <a
-              href="mailto:info@minimismi.com"
-              target="_blank"
-              rel="noopener nofollow noreferrer"
-            >
-              <BsEnvelope size={22} />
-            </a>
-            <a
-              href="https://api.whatsapp.com/send?phone=37129760818"
-              target="_blank"
-              rel="noopener nofollow noreferrer"
-            >
-              <ImWhatsapp size={20} />
-            </a>
-          </div>
-          <hr className={styles.split} />
+
           {!isSubscribed ? (
-            <>
+            <div
+              className={classnames({
+                [styles.notification]: true,
+                [`animate__animated`]: true,
+              })}
+              ref={ref}
+            >
               <h2>
                 {lang?.value === `en`
-                  ? `The first batch will arrive soon. Don't miss it! ↴`
+                  ? `The first batch will arrive soon. Don't miss it!`
                   : `Pirmā kolekcija pieejama drīzumā. Nepalaid garām!`}
               </h2>
-              <label className={styles.inputLabel} htmlFor="emailAddress">
-                {lang?.value === `en`
-                  ? `Your e-mail address:`
-                  : `Tava e-pasta adrese:`}
-              </label>
               <input
                 value={email}
                 onChange={(e) => {
@@ -159,7 +149,7 @@ export default function Home() {
                   ? `One moment.. Adding you to the list.`
                   : `Uzgaidiet mirklīti… Pievienojam Jūs sarakstā.`}
               </button>
-            </>
+            </div>
           ) : (
             <h2>
               💃{` `}
@@ -168,7 +158,104 @@ export default function Home() {
                 : `Paldies!  Mēs informēsim Jūs par jaunumiem`}
             </h2>
           )}
+          <hr className={styles.split} />
+          <div className={styles.iconsWrapper}>
+            <p className={styles.iconsText}>
+              {lang?.value === `en`
+                ? `Follow us for more:`
+                : `Sekojiet mums, lai uzzinātu vairāk?`}
+            </p>
+            <a
+              href="https://www.instagram.com/minimismi_lv/"
+              target="_blank"
+              rel="noopener nofollow noreferrer"
+            >
+              <FiInstagram size={20} />
+            </a>
+            <a
+              href="mailto:info@minimismi.com"
+              target="_blank"
+              rel="noopener nofollow noreferrer"
+            >
+              <BsEnvelope size={22} />
+            </a>
+            <a
+              href="https://api.whatsapp.com/send?phone=37129760818"
+              target="_blank"
+              rel="noopener nofollow noreferrer"
+            >
+              <ImWhatsapp size={20} />
+            </a>
+          </div>
+          <hr className={styles.split} />
         </main>
+      </div>
+
+      <div className={styles.images}>
+        <div className={styles.image}>
+          <Image
+            src="/images/leotard-1.jpg"
+            alt="Minimismi Leotard Preview 1"
+            width={300}
+            height={394}
+          />
+          <div className={styles.buttonWrap}>
+            <button onClick={() => scrollAndShake()}>
+              <BsCartPlus size={22} />
+              {lang?.value === `en`
+                ? `Add to cart`
+                : `Pievienot iepirkuma grozam`}
+            </button>
+          </div>
+        </div>
+        <div className={styles.image}>
+          <Image
+            src="/images/leotard-2.jpg"
+            alt="Minimismi Leotard Preview 2"
+            width={300}
+            height={394}
+          />
+          <div className={styles.buttonWrap}>
+            <button onClick={() => scrollAndShake()}>
+              <BsCartPlus size={22} />
+              {lang?.value === `en`
+                ? `Add to cart`
+                : `Pievienot iepirkuma grozam`}
+            </button>
+          </div>
+        </div>
+        <div className={styles.image}>
+          <Image
+            src="/images/leotard-3.jpg"
+            alt="Minimismi Leotard Preview 3"
+            width={300}
+            height={394}
+          />
+          <div className={styles.buttonWrap}>
+            <button onClick={() => scrollAndShake()}>
+              <BsCartPlus size={22} />
+              {lang?.value === `en`
+                ? `Add to cart`
+                : `Pievienot iepirkuma grozam`}
+            </button>
+          </div>
+        </div>
+        <div className={styles.image}>
+          <Image
+            src="/images/leotard-4.jpg"
+            alt="Minimismi Leotard Preview 4"
+            width={300}
+            height={394}
+          />
+          <div className={styles.buttonWrap}>
+            <button onClick={() => scrollAndShake()}>
+              <BsCartPlus size={22} />
+              {lang?.value === `en`
+                ? `Add to cart`
+                : `Pievienot iepirkuma grozam`}
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className={styles.mask}>
@@ -223,8 +310,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      <footer className={styles.footer}></footer>
     </div>
   );
 }
