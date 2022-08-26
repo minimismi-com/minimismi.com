@@ -240,22 +240,6 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className={styles.image}>
-          <Image
-            src="/images/leotard-4.jpg"
-            alt="Minimismi Leotard Preview 4"
-            width={300}
-            height={394}
-          />
-          <div className={styles.buttonWrap}>
-            <button onClick={() => scrollAndShake()}>
-              <BsCartPlus size={22} />
-              {lang?.value === `en`
-                ? `Add to cart`
-                : `Pievienot iepirkuma grozam`}
-            </button>
-          </div>
-        </div>
       </div>
 
       <div className={styles.mask}>

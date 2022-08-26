@@ -19,6 +19,17 @@ export default class MyDocument extends Document {
             type="font/woff2"
             crossOrigin=""
           />
+          <meta property="og:url" content="https://minimismi.com" />
+          <meta property="og:title" content="Minimismi.com" />
+          <meta
+            property="og:description"
+            content="Uniquely designed, hand-made, eco-friendly ballet clothing"
+          />
+          <meta
+            property="og:image"
+            content="https://minimismi.com/images/minimismi-com_open-graph.jpg"
+          />
+          <meta property="og:site_name" content="Minimismi.com" />
         </Head>
         <body>
           <Main />
